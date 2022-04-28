@@ -38,7 +38,7 @@ class ProfilesController < ApplicationController
   end
 
   private
-  def item_params
+  def profile_params
     params.require(:profile).permit(:image, :nickname, :comment, :content, :twitter, :instagram ).merge(user_id: current_user.id)
   end
 

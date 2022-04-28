@@ -1,6 +1,6 @@
 <%= render "shared/second-header"%>
 
-<%= form_with model: @profile, url: , class: 'registration-main', local: true do |f| %>
+<%= form_with model: @profile, local: true do |f| %>
 
 <div class='form-wrap'>
   <div class='form-header'>
@@ -13,11 +13,14 @@
 
   <div class="img-upload">
     <div class="click-upload">
-      <p>
-        クリックして画像をアップロード
-      </p>
-      <%= f.file_field :image, id:"profile-image" %>
-      <%= f.hidden_field :image_cache %>
+      <% if @profile.image? %>
+        <%= image_tag @profile.image.url %>
+      <% else %>
+        <%= image_tag "/assets/default-user-icon.png", :size => '100x100' %>
+      <% end %>
+      <button type="button" class="btn-profile-image">
+         <%= f.file_field :image, accept: 'image/jpeg,image/gif,image/png' %>
+      </button>
     </div>
   </div>
   <div class="form-group">

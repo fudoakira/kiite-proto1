@@ -11,19 +11,23 @@
   <div class='user-lists'>
     <div class='login-user'>
       <h2 class='login-user-title'>
-        ログイン中ユーザー
+        ユーザー一覧
       </h2>
       <div class='user-list'>
-        <% @users.each do |user| %>
+        <% @profiles.each do |profile| %>
           <div class='user-wrapper'>
-            <%= link_to user_path(user.id) do %>
-              <%= image_tag user.image.thumb50.url, class:"user_image" %>
+            <%= link_to profile_path(profile.id) do %>
+              <% if profile.image? %>
+                <%= image_tag profile.image.url, :size => '100x100' %>
+              <% else %>
+                <%= image_tag "/assets/default-user-icon.png", :size => '100x100' %>
+              <% end %>
               <div class='user-body'>
                 <div class='header_comment'>
-                  <%= user.comment %>
+                  <%= profile.comment %>
                 </div>
                 <div class='user_name'>
-                  <%= user.nickname %>
+                  <%= profile.nickname %>
                 </div>
                 <p class='rating-star'>
                   <%= image_tag "star-on.png" %>

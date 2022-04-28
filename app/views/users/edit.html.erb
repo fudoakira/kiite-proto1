@@ -33,46 +33,7 @@
     </div>
     <%= f.password_field :password_confirmation, class:"input-default", id:"password-confirmation", placeholder:"同じパスワードを入力して下さい" %>
   </div>
-  <div class="form-group">
-    <div class='form-text-wrap'>
-      <label class="form-text">ニックネーム</label>
-      <span class="indispensable">必須</span>
-    </div>
-    <%= f.text_area :nickname, class:"input-default", id:"nickname", maxlength:"40" %>
-  </div>
-  <div class="img-upload">
-    <div class="click-upload">
-      <p>
-        クリックして画像をアップロード
-      </p>
-      <%= f.file_field :image, id:"item-image" %>
-      <%= f.hidden_field :image_cache %>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class='form-text-wrap'>
-      <label class="form-text">固定コメント</label>
-    </div>
-    <%= f.text_area :comment, class:"input-default", id:"comment", maxlength:"40" %>
-  </div>
-  <div class="form-group">
-    <div class='form-text-wrap'>
-      <label class="form-text">自由記載欄</label>
-    </div>
-    <%= f.text_field :content, class:"input-default", id:"content", placeholder:"コメント・自己紹介など" %>
-  </div>
-  <div class="form-group">
-    <div class='form-text-wrap'>
-      <label class="form-text">SNSアカウント登録</label>
-    </div>
-    <%= image_tag "twitter.png", class: :twitter_icon %>
-    <%= f.text_field :twitter, class:"input-default", id:"twitter", placeholder:"URLを入力してください" %>
-    
-    <%= image_tag "instagram.png", class: :instagram_icon %>
-    <%= f.text_field :instagram, class:"input-default", id:"instagram", placeholder:"URLを入力してください" %>
-  </div>
   <div class='register-btn'>
     <%= f.submit "登録" ,class:"register-red-btn" %>
   </div>
-</div>
 <% end %>

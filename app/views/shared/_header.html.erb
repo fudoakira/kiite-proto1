@@ -14,7 +14,8 @@
       <% if user_signed_in? %>
         <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout" %></li>
       <%# elsif user_signed_in? && @profile.current_user.id.present? %>
-        <li><%= link_to 'マイプロフィール', user_path(current_user.id), class: "my-profile" %></li>
+        <li><%= link_to 'マイプロフィール', profile_path(current_user.id), class: "my-profile" %></li>
+        <li><%= link_to 'プロフィール登録', new_profile_path, class: "registration-profile" %></li>
         <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout" %></li>
       <% else %>  
         <li><%= link_to 'ログイン', new_user_session_path, class: "login" %></li>
