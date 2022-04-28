@@ -1,2 +1,59 @@
-<h1>Profiles#index</h1>
-<p>Find me in app/views/profiles/index.html.erb</p>
+<%= render "shared/header" %>
+
+<div class='main'>
+
+  <div class='call-contents'>
+    <h2 class='call-title'>
+      気軽に相談してみよう！
+    </h2>
+  </div>
+
+  <div class='user-lists'>
+    <div class='login-user'>
+      <h2 class='login-user-title'>
+        ログイン中ユーザー
+      </h2>
+      <div class='user-list'>
+        <% @users.each do |user| %>
+          <div class='user-wrapper'>
+            <%= link_to user_path(user.id) do %>
+              <%= image_tag user.image.thumb50.url, class:"user_image" %>
+              <div class='user-body'>
+                <div class='header_comment'>
+                  <%= user.comment %>
+                </div>
+                <div class='user_name'>
+                  <%= user.nickname %>
+                </div>
+                <p class='rating-star'>
+                  <%= image_tag "star-on.png" %>
+                </p>
+                <div class='tag-list'>
+                  <p>仕事 なんでも</p>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class='high-rate-user'>
+      <h2 class='high-rate-user-title'>
+        評価の高いユーザー
+      </h2>
+      <div class='user-wrapper'>
+        <%#= link_to image_tag(.image, class: :user_image) %>
+        <div class='user-body'>
+          <%#= link_to class: :header-comment %>
+          <%#= link_to class: :user-name %>
+          <p class='rating-star'>
+            <%#= %>
+          </p>
+          <div class='tag-list'>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

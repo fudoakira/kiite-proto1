@@ -1,0 +1,43 @@
+<%= render "shared/header" %>
+
+<div class='user-show'>
+  <div class='chat-start'>
+    <div class='chat-start-btn'>
+      <% unless current_user.id == @user.id %>
+        <% if @isRoom == true %>
+          <%= link_to "メッセージを送る", room_path, class:"chat-start-red-btn" %>
+        <% else %>
+          <%= form_with model: @room, lpcal: true do |f| %>
+            <%= fields_for @entry do |e| %>
+              <%= e.hidden_field :user_id, value: @user.id %>
+            <% end %>
+            <%= f.submit "メッセージを送る", class:"chat-start-red-btn" %>
+         <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class='user-profile'>
+    <%= image_tag @user.image.thumb.url, class:"user_image" %>
+    <p class='user-name'>
+    <%= @user.nickname %>
+    </p>
+    <p class='profile-comment'>
+    <%= @user.content %>
+    </p>
+    <div class='sns-link'>
+      <ul class="snsbtniti">
+        <li><a href="TwitterのプロフィールURL" class="flowbtn6 fl_tw1"><i class="fab fa-twitter"></i></a></li>
+        <li><a href="インスタのプロフィールURL" class="flowbtn6 insta_btn6"><i class="fab fa-instagram"></i></a></li>
+      </ul>
+    </div>
+    <div class='tag-list'>
+    </div>
+    <div class='rating-star'>
+    </div>
+    <%= link_to "プロフィールの編集", edit_user_registration_path(@user.id), method: :get, class: "user-edit-btn" %>
+    <p class="or-text">or</p>
+    <%= link_to "削除", user_registration_path(@user.id), method: :delete, class:"user-destroy" %>
+  </div>
+</div>
