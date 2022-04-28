@@ -13,6 +13,7 @@
 - has_many :rooms, through: :room_users
 - has_many :messages
 - has_many :favorites
+- has_many :ratings
 - has_one :profile
 
 ## rooms テーブル
@@ -63,6 +64,19 @@
 - belongs_to :user
 - belongs_to :profile
 
+## ratings テーブル
+
+| Column  | Type       | Options                        |
+| ------- | ---------- | ------------------------------ |
+| rate    | float      |                                |
+| user    | references | null: false, foreign_key: true |
+| profile | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :user
+- belongs_to :profile
+
 ## profiles テーブル
 
 | Column    | Type       | Options                        |
@@ -73,7 +87,6 @@
 | content   | text       |                                |
 | twitter   | string     |                                | 
 | instagram | string     |                                |
-| rate      | float      |                                |
 | user      | references | null: false, foreign_key: true |
 
 ### Association
@@ -82,6 +95,7 @@
 - has_many :profile_tags
 - has_many :tags, through: :profile_tags
 - has_many :favorites
+- has_many :ratings
 
 ## tags テーブル
 

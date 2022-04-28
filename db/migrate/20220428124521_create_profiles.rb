@@ -7,7 +7,6 @@ class CreateProfiles < ActiveRecord::Migration[6.0]
       t.text   :content
       t.string :twitter
       t.string :instagram
-      t.float  :rate
       t.references :user, null: false, foreign_key: true
       t.timestamps
     end

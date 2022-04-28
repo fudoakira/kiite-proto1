@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 2022_04_28_124521) do
     t.text "content"
     t.string "twitter"
     t.string "instagram"
-    t.float "rate"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
