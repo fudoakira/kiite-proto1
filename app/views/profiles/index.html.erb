@@ -18,9 +18,9 @@
           <div class='user-wrapper'>
             <%= link_to profile_path(profile.id) do %>
               <% if profile.image? %>
-                <%= image_tag profile.image.url, :size => '100x100' %>
+                <%= image_tag profile.image.url, :size => '200x200' %>
               <% else %>
-                <%= image_tag "/assets/default-user-icon.png", :size => '100x100' %>
+                <%= image_tag "/assets/default-user-icon.png", :size => '200x200' %>
               <% end %>
               <div class='user-body'>
                 <div class='header_comment'>

@@ -14,9 +14,9 @@
   <div class="img-upload">
     <div class="click-upload">
       <% if @profile.image? %>
-        <%= image_tag @profile.image.url %>
+        <%= image_tag @profile.image.url, :size => '200x200' %>
       <% else %>
-        <%= image_tag "/assets/default-user-icon.png", :size => '100x100' %>
+        <%= image_tag "/assets/default-user-icon.png", :size => '200x200' %>
       <% end %>
       <button type="button" class="btn-profile-image">
          <%= f.file_field :image, accept: 'image/jpeg,image/gif,image/png' %>
