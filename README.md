@@ -1,24 +1,107 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| email              | string | null: false |
+| encrypted_password | string | null: false |
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_many :room_users
+- has_many :rooms, through: :room_users
+- has_many :messages
+- has_many :favorites
+- has_one :profile
 
-* Configuration
+## rooms テーブル
 
-* Database creation
+| column | Type | Options |
+| ------ | ---- | ------- |
 
-* Database initialization
+### Association
 
-* How to run the test suite
+- has_many :room_users
+- has_many :users, through: :room_users
+- has_many :messages
 
-* Services (job queues, cache servers, search engines, etc.)
+## room_users テーブル
 
-* Deployment instructions
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| user   | references | null: false, foreign_key: true |
+| room   | references | null: false, foreign_key: true |
 
-* ...
+### Association
+
+- belongs_to :user
+- belongs_to :room
+
+## messages テーブル
+
+| Column  | Type       | Options                        |
+| ------- | ---------- | ------------------------------ |
+| message | text       |                                |
+| user    | references | null: false, foreign_key: true |
+| room    | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :user
+- belongs_to :room
+
+## favorites テーブル
+
+| Column  | Type       | Options                        |
+| ------- | ---------- | ------------------------------ |
+| user    | references | null: false, foreign_key: true |
+| profile | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :user
+- belongs_to :profile
+
+## profiles テーブル
+
+| Column    | Type       | Options                        |
+| --------- | ---------- | ------------------------------ |
+| nickname  | string     | null: false                    |
+| image     | string     |                                |
+| comment   | string     |                                |
+| content   | text       |                                |
+| twitter   | string     |                                | 
+| instagram | string     |                                |
+| rate      | float      |                                |
+| user      | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :user
+- has_many :profile_tags
+- has_many :tags, through: :profile_tags
+- has_many :favorites
+
+## tags テーブル
+
+| Column   | Type   | Options |
+| -------- | ------ | ------- |
+| tag_name | string |         |
+
+### Association
+
+- has_many :profile_tags
+- has_many :profiles, through: :profile_tags
+
+## profile_tag テーブル
+
+| Column  | Type       | Options                        |
+| ------- | ---------- | ------------------------------ |
+| profile | references | null: false, foreign_key: true |
+| tag     | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :profile
+- belongs_to :tag
