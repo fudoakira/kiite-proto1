@@ -9,48 +9,10 @@
 
 ### Association
 
-- has_many :room_users
-- has_many :rooms, through: :room_users
-- has_many :messages
 - has_many :favorites
 - has_many :ratings
 - has_one :profile
 
-## rooms テーブル
-
-| column | Type | Options |
-| ------ | ---- | ------- |
-
-### Association
-
-- has_many :room_users
-- has_many :users, through: :room_users
-- has_many :messages
-
-## room_users テーブル
-
-| Column | Type       | Options                        |
-| ------ | ---------- | ------------------------------ |
-| user   | references | null: false, foreign_key: true |
-| room   | references | null: false, foreign_key: true |
-
-### Association
-
-- belongs_to :user
-- belongs_to :room
-
-## messages テーブル
-
-| Column  | Type       | Options                        |
-| ------- | ---------- | ------------------------------ |
-| message | text       |                                |
-| user    | references | null: false, foreign_key: true |
-| room    | references | null: false, foreign_key: true |
-
-### Association
-
-- belongs_to :user
-- belongs_to :room
 
 ## favorites テーブル
 
@@ -92,11 +54,49 @@
 ### Association
 
 - belongs_to :user
+- has_many :room_users
+- has_many :rooms, through: :room_users
+- has_many :messages
 - has_many :profile_tags
 - has_many :tags, through: :profile_tags
 - has_many :favorites
 - has_many :ratings
 
+## rooms テーブル
+
+| column | Type | Options |
+| ------ | ---- | ------- |
+
+### Association
+
+- has_many :room_users
+- has_many :profiles, through: :room_users
+- has_many :messages
+
+## room_users テーブル
+
+| Column  | Type       | Options                        |
+| ------- | ---------- | ------------------------------ |
+| profile | references | null: false, foreign_key: true |
+| room    | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :profile
+- belongs_to :room
+
+## messages テーブル
+
+| Column  | Type       | Options                        |
+| ------- | ---------- | ------------------------------ |
+| message | text       |                                |
+| profile | references | null: false, foreign_key: true |
+| room    | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :profile
+- belongs_to :room
 ## tags テーブル
 
 | Column   | Type   | Options |
