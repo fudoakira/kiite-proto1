@@ -52,6 +52,12 @@
     <%= image_tag "instagram.png", class: :instagram_icon %>
     <%= f.text_field :instagram, class:"input-default", id:"instagram", placeholder:"URLを入力してください" %>
   </div>
+  <div class="form-group">
+    <div class="form-text-wrap">
+      <label class="form-text">ハッシュタグ(スペースを入力すると複数のタグ付けができます)</label>
+    </div>
+    <%= f.text_field :tag_name, value: @tag_list, class:"input-default", id:"tag_name", placeholder:"例)#仕事 #恋愛 #人間関係"%>
+  </div>
   <div class='register-btn'>
     <%= f.submit "登録" ,class:"register-red-btn" %>
   </div>

@@ -33,7 +33,7 @@
                   <%= image_tag "star-on.png" %>
                 </p>
                 <div class='tag-list'>
-                  <p>仕事 なんでも</p>
+                  <%= link_to profile.tags.map(&:tag_name).join(', '), tag_profiles_path(tag_id: tag.id) %>
                 </div>
               </div>
             <% end %>

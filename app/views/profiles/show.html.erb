@@ -8,8 +8,8 @@
           <%= link_to "メッセージを送る", room_path, class:"chat-start-red-btn" %>
         <% else %>
           <%= form_with model: @room, lpcal: true do |f| %>
-            <%= fields_for @room_user do |r| %>
-              <%= r.hidden_field :user_id, value: @profile.user_id %>
+            <%= fields_for @roomUser do |r| %>
+              <%= r.hidden_field :profile_id, value: @profile.user_id %>
             <% end %>
             <%= f.submit "メッセージを送る", class:"chat-start-red-btn" %>
          <% end %>
@@ -37,6 +37,9 @@
       </ul>
     </div>
     <div class='tag-list'>
+      <% @profile_tags.each do |tag| %>
+        <%= link_to tag.tag_name, tag_profiles_path(tag_id: tag.id) %>
+      <% end %>
     </div>
     <div class='rating-star'>
     </div>

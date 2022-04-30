@@ -1,0 +1,37 @@
+<%= render "shared/header" %>
+
+<div class="main">
+
+  <div class='call-contents'>
+    <h2 class='call-title'>
+      <%= @tag.tag_name %>の検索結果
+    </h2>
+  </div>
+
+  <div class='user-lists'>
+    <div class='user-list'>
+      <% @profiles.each do |profile| %>
+        <div class='user-wrapper'>
+          <%= link_to profile_path(profile.id) do %>
+            <% if profile.image? %>
+              <%= image_tag profile.image.url, :size => '200x200' %>
+            <% else %>
+              <%= image_tag "/assets/default-user-icon.png", :size => '200x200' %>
+            <% end %>
+            <div class='user-body'>
+              <div class='header_comment'>
+                <%= profile.comment %>
+              </div>
+              <div class='user_name'>
+                <%= profile.nickname %>
+              </div>
+              <p class='rating-star'>
+                <%= image_tag "star-on.png" %>
+              </p>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
