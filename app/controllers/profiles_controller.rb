@@ -22,6 +22,8 @@ class ProfilesController < ApplicationController
 
   def show
     @profile_tags = @profile.tags
+    favorites = Favorite.where(user_id: current_user.id).order(created_at: :desc).pluck(:profile_id)
+    @favorite_list = Profile.find(favorites)
     @sendUser = RoomUser.where(profile_id: current_user.id)
     @receiveUser = RoomUser.where(profile_id: @profile.id)
 

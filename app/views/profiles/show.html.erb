@@ -18,6 +18,10 @@
     </div>
   </div>
 
+  <div class="favorite-btn", id="favorite_<%= @profile.id %>">
+    <%= render "favorites/favorite", profile: @profile %>
+  </div>
+  
   <div class='user-profile'>
     <% if @profile.image? %>
       <%= image_tag @profile.image.url, :size => '400x400' %>
@@ -46,5 +50,15 @@
     <%= link_to "プロフィールの編集", edit_profile_path(current_user.id), method: :get, class: "user-edit-btn" %>
     <p class="or-text">or</p>
     <%= link_to "削除", profile_path(current_user.id), method: :delete, class:"user-destroy" %>
+  </div>
+
+  <div class="favorite-list">
+    <% if @favorite_list.present? %>
+      <% @favorite_list.each do |profile| %>
+        <div class="favorite-profile-name">
+          <%= profile.nickname %>
+        </div>
+      <% end %>
+    <% end %>
   </div>
 </div>
