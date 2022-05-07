@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: "profiles#index"
   resources :profiles do
     resources :favorites, only: [:create, :destroy]
+    resources :ratings, only: [:new, :create, :edit, :update]
   end
   resources :users, only: [:edit, :update] do
     get :favorites, on: :collection

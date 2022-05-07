@@ -1,0 +1,26 @@
+<%= render "shared/second-header"%>
+
+<%= form_with model: @rating, local: true do |f| %>
+
+<div class='form-wrap'>
+  <div class='form-header'>
+    <h1 class='form-header-text'>
+      評価入力
+    </h1>
+  </div>
+
+  <div id="rating_form">
+    <%= f.hidden_field :rate %>
+  </div>
+</div>
+<% end %>
+
+<script>
+  $('#rating_form').raty({
+    starOn: "<%= asset_path('star-on.png') %>",
+    starOff: "<%= asset_path('star-off.png') %>",
+    starHalf: "<%= asset_path('star-half.png') %>",
+    scoreName: 'rating[rate]',
+    half: true,
+  });
+</script>

@@ -1,7 +1,10 @@
 class ProfilesController < ApplicationController
+
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
+  before_action :contributor_confirmation, only: [:edit, :destroy]
+
   def index
-    @profiles = Profile.all
+    @profiles = Profile.order("created_at DESC")
     @tag_list = Tag.all
   end
 
@@ -21,9 +24,11 @@ class ProfilesController < ApplicationController
   end
 
   def show
+    @profiles = Profile.all
     @profile_tags = @profile.tags
     favorites = Favorite.where(user_id: current_user.id).order(created_at: :desc).pluck(:profile_id)
     @favorite_list = Profile.find(favorites)
+    @rating = Rating.find_by(user_id: current_user.id, profile_id: @profile.id)
     @sendUser = RoomUser.where(profile_id: current_user.id)
     @receiveUser = RoomUser.where(profile_id: @profile.id)
 
@@ -75,5 +80,11 @@ class ProfilesController < ApplicationController
 
   def set_profile
     @profile = Profile.find(params[:id])
+  end
+
+  def contributor_confirmation
+    unless current_user.id == @profile.user_id
+      redirect_to root_path
+    end
   end
 end

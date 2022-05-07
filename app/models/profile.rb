@@ -8,6 +8,7 @@ class Profile < ApplicationRecord
   has_many :profile_tags, dependent: :destroy
   has_many :tags, through: :profile_tags
   has_many :favorites, dependent: :destroy
+  has_many :ratings, dependent: :destroy
 
   validates :nickname, presence: true
 

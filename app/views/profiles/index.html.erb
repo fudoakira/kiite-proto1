@@ -1,4 +1,8 @@
-<%= render "shared/header" %>
+<%# if @profiles.find_by(user_id: current_user.id).nil? %>
+  <%= render partial: "shared/header", locals: {profiles: @profiles} %>
+<%# else %>
+  <%#= render partial: "shered/header2" %>
+<%# end %>
 
 <div class='main'>
 
@@ -11,7 +15,7 @@
   <div class='user-lists'>
     <div class='login-user'>
       <h2 class='login-user-title'>
-        ユーザー一覧
+        全体のユーザー
       </h2>
       <div class='user-list'>
         <% @profiles.each do |profile| %>
@@ -33,7 +37,7 @@
                   <%= image_tag "star-on.png" %>
                 </p>
                 <div class='tag-list'>
-                  <%= link_to profile.tags.map(&:tag_name).join(', '), tag_profiles_path(tag_id: tag.id) %>
+                  <%= profile.tags.map(&:tag_name).join(', ') %>
                 </div>
               </div>
             <% end %>

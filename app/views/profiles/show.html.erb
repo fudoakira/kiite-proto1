@@ -1,4 +1,4 @@
-<%= render "shared/header" %>
+<%= render partial: "shared/header", locals: {profiles: @profiles} %>
 
 <div class='user-show'>
   <div class='chat-start'>
@@ -19,8 +19,13 @@
   </div>
 
   <div class="favorite-btn", id="favorite_<%= @profile.id %>">
-    <%= render "favorites/favorite", profile: @profile %>
+    <% unless current_user.id == @profile.user_id %>
+      <%= render "favorites/favorite", profile: @profile %>
+    <% end %>
   </div>
+
+  <div class="rating-form-link">
+    <%#= link_to "評価画面へ", new_profile_rating_path(@profile.id), class:"registration-rating" %>
   
   <div class='user-profile'>
     <% if @profile.image? %>
@@ -36,8 +41,11 @@
     </p>
     <div class='sns-link'>
       <ul class="snsbtniti">
-        <li><a href="TwitterのプロフィールURL" class="flowbtn6 fl_tw1"><i class="fab fa-twitter"></i></a></li>
-        <li><a href="インスタのプロフィールURL" class="flowbtn6 insta_btn6"><i class="fab fa-instagram"></i></a></li>
+        <% if @profile.twitter? %>
+          <li><a href="TwitterのプロフィールURL" class="flowbtn6 fl_tw1"><i class="fab fa-twitter"></i></a></li>
+        <% elsif @profile.instagram? %>
+          <li><a href="インスタのプロフィールURL" class="flowbtn6 insta_btn6"><i class="fab fa-instagram"></i></a></li>
+        <% end %>
       </ul>
     </div>
     <div class='tag-list'>
@@ -53,11 +61,14 @@
   </div>
 
   <div class="favorite-list">
-    <% if @favorite_list.present? %>
-      <% @favorite_list.each do |profile| %>
-        <div class="favorite-profile-name">
-          <%= profile.nickname %>
-        </div>
+    <% if current_user.id == @profile.user_id %>
+      <p class="favorite-list-title">お気に入りのユーザー</p>
+      <% if @favorite_list.present? %>
+        <% @favorite_list.each do |profile| %>
+          <div class="favorite-profile-name">
+            <%= link_to profile.nickname, profile_path(profile_id: profile.id) %>
+          </div>
+        <% end %>
       <% end %>
     <% end %>
   </div>
