@@ -1,7 +1,42 @@
 <%= render partial: "shared/header", locals: {profiles: @profiles} %>
 
 <div class='user-show'>
-  <div class='chat-start'>
+
+  <div class="rating-form-link">
+    <%#= link_to "評価画面へ", new_profile_rating_path(@profile.id), class:"registration-rating" %>
+  
+  <div class='user-profile'>
+    <div class="favorite-btn", id="favorite_<%= @profile.id %>">
+      <% unless current_user.id == @profile.user_id %>
+        <%= render "favorites/favorite", profile: @profile %>
+      <% end %>
+    </div>
+    <% if @profile.image? %>
+      <%= image_tag @profile.image.url, :size => '400x400' %>
+    <% else %>
+      <%= image_tag "/assets/default-user-icon.png", :size => '400x400' %>
+    <% end %>
+    <p class='user-name'>
+    <%= @profile.nickname %>
+    </p>
+    <p class='profile-comment'>
+    <%= @profile.content %>
+    </p>
+    <div class='sns-link'>
+      <ul class="snsbtn">
+        <% if @profile.twitter? %>
+          <li><a href="@profile.twitter" class="flowbtn6 fl_tw1"><i class="fab fa-twitter"></i></a></li>
+        <% end %>
+        <% if @profile.instagram? %>
+          <li><a href="@profile.instagram" class="flowbtn6 insta_btn6"><i class="fab fa-instagram"></i></a></li>
+        <% end %>
+      </ul>
+    </div>
+    <div class='tag-list'>
+      <% @profile_tags.each do |tag| %>
+        <%= link_to tag.tag_name, tag_profiles_path(tag_id: tag.id) %>
+      <% end %>
+    </div>
     <div class='chat-start-btn'>
       <% unless current_user.id == @profile.user_id %>
         <% if @isRoom == true %>
@@ -16,48 +51,15 @@
         <% end %>
       <% end %>
     </div>
-  </div>
+    
 
-  <div class="favorite-btn", id="favorite_<%= @profile.id %>">
-    <% unless current_user.id == @profile.user_id %>
-      <%= render "favorites/favorite", profile: @profile %>
-    <% end %>
-  </div>
-
-  <div class="rating-form-link">
-    <%#= link_to "評価画面へ", new_profile_rating_path(@profile.id), class:"registration-rating" %>
-  
-  <div class='user-profile'>
-    <% if @profile.image? %>
-      <%= image_tag @profile.image.url, :size => '400x400' %>
-    <% else %>
-      <%= image_tag "/assets/default-user-icon.png", :size => '400x400' %>
-    <% end %>
-    <p class='user-name'>
-    <%= @profile.nickname %>
-    </p>
-    <p class='profile-comment'>
-    <%= @profile.content %>
-    </p>
-    <div class='sns-link'>
-      <ul class="snsbtniti">
-        <% if @profile.twitter? %>
-          <li><a href="TwitterのプロフィールURL" class="flowbtn6 fl_tw1"><i class="fab fa-twitter"></i></a></li>
-        <% elsif @profile.instagram? %>
-          <li><a href="インスタのプロフィールURL" class="flowbtn6 insta_btn6"><i class="fab fa-instagram"></i></a></li>
-        <% end %>
-      </ul>
-    </div>
-    <div class='tag-list'>
-      <% @profile_tags.each do |tag| %>
-        <%= link_to tag.tag_name, tag_profiles_path(tag_id: tag.id) %>
-      <% end %>
-    </div>
     <div class='rating-star'>
     </div>
-    <%= link_to "プロフィールの編集", edit_profile_path(current_user.id), method: :get, class: "user-edit-btn" %>
-    <p class="or-text">or</p>
-    <%= link_to "削除", profile_path(current_user.id), method: :delete, class:"user-destroy" %>
+    <div class="edit-delete">
+      <%= link_to "プロフィールの編集", edit_profile_path(current_user.id), method: :get, class: "user-edit-btn" %>
+      <p class="or-text">or</p>
+      <%= link_to "削除", profile_path(current_user.id), method: :delete, class:"user-destroy" %>
+    </div>
   </div>
 
   <div class="favorite-list">
@@ -65,8 +67,9 @@
       <p class="favorite-list-title">お気に入りのユーザー</p>
       <% if @favorite_list.present? %>
         <% @favorite_list.each do |profile| %>
-          <div class="favorite-profile-name">
-            <%= link_to profile.nickname, profile_path(profile_id: profile.id) %>
+          <div class="favorite-user-profile">
+            <%= link_to image_tag profile.image.url, :size => '50x50'%>
+            <%= link_to profile.nickname, profile_path(profile.id) %>
           </div>
         <% end %>
       <% end %>

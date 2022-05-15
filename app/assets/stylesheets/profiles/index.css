@@ -1,0 +1,55 @@
+a {
+  text-decoration: none;
+}
+
+.main {
+  background: white;
+  margin-left: 140px;
+  padding-top: 200px;
+}
+
+.call-title {
+  font-size: 4vh;
+}
+
+.login-user-title {
+  font-size: 4vh;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.user-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.user-wrapper {
+  height: 40vh;
+  width: 20%;
+  margin-right: 2vw;
+  padding-left: 30px;
+  margin-bottom: 6vh;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgb(245, 225, 228);
+}
+
+.user_image {
+  margin-bottom: 10px;
+  text-align: center;
+}
+.header_comment {
+  font-size: 18px;
+  color: black;
+}
+
+.user_name {
+  font-size: 18px;
+  color: gray;
+}
+
+.tag-list {
+  font-size: 15px;
+  margin-top: 3px;
+  color: black;
+}

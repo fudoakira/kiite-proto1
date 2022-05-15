@@ -1,8 +1,4 @@
-<%# if @profiles.find_by(user_id: current_user.id).nil? %>
-  <%= render partial: "shared/header", locals: {profiles: @profiles} %>
-<%# else %>
-  <%#= render partial: "shered/header2" %>
-<%# end %>
+<%= render partial: "shared/header", locals: {profiles: @profiles} %>
 
 <div class='main'>
 
@@ -33,34 +29,13 @@
                 <div class='user_name'>
                   <%= profile.nickname %>
                 </div>
-                <p class='rating-star'>
-                  <%= image_tag "star-on.png" %>
-                </p>
                 <div class='tag-list'>
-                  <%= profile.tags.map(&:tag_name).join(', ') %>
+                  <%= profile.tags.map(&:tag_name).join(' ') %>
                 </div>
               </div>
             <% end %>
           </div>
         <% end %>
-      </div>
-    </div>
-
-    <div class='high-rate-user'>
-      <h2 class='high-rate-user-title'>
-        評価の高いユーザー
-      </h2>
-      <div class='user-wrapper'>
-        <%#= link_to image_tag(.image, class: :user_image) %>
-        <div class='user-body'>
-          <%#= link_to class: :header-comment %>
-          <%#= link_to class: :user-name %>
-          <p class='rating-star'>
-            <%#= %>
-          </p>
-          <div class='tag-list'>
-          </div>
-        </div>
       </div>
     </div>
   </div>

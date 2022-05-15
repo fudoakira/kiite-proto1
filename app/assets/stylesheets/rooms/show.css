@@ -1,0 +1,17 @@
+.chat-body {
+  height: 90vh;
+  padding-top: 130px;
+  padding-bottom: 10vh;
+  margin-left: 5vw;
+  margin-right: 5vw;
+}
+.chat-user-name {
+  font-size: 15px;
+}
+
+.chat-form {
+  height: 10vh;
+  margin-left: 5vw;
+  margin-right: 5vw;
+  position: fixed;
+}

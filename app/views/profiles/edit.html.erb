@@ -2,64 +2,74 @@
 
 <%= form_with model: @profile, local: true do |f| %>
 
-<div class='form-wrap'>
-  <div class='form-header'>
-    <h1 class='form-header-text'>
-      プロフィール入力
-    </h1>
-  </div>
+<div class='registration-main'>
+  <div class='form-wrap'>
+    <div class='form-header'>
+      <h1 class='form-header-text'>
+        プロフィール入力
+      </h1>
+    </div>
 
-  <%= render 'shared/error_messages', model: f.object %>
+    <%= render 'shared/error_messages', model: f.object %>
 
-  <div class="img-upload">
-    <div class="click-upload">
-      <% if @profile.image? %>
-        <%= image_tag @profile.image.url, :size => '200x200' %>
-      <% else %>
-        <%= image_tag "/assets/default-user-icon.png", :size => '200x200' %>
-      <% end %>
-      <button type="button" class="btn-profile-image">
-         <%= f.file_field :image, accept: 'image/jpeg,image/gif,image/png' %>
-      </button>
+    <div class="img-upload">
+      <div class="click-upload">
+        <% if @profile.image? %>
+          <%= image_tag @profile.image.url, :size => '300x300' %>
+        <% else %>
+          <%= image_tag "/assets/default-user-icon.png", :size => '300x300' %>
+        <% end %>
+        <div class="upload-btn">
+          <button type="button" class="btn-profile-image">
+            <%= f.file_field :image, accept: 'image/jpeg,image/gif,image/png,image/heic' %>
+          </button>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <div class='form-text-wrap'>
-      <label class="form-text">ニックネーム</label>
-      <span class="indispensable">必須</span>
+    <div class="form-group">
+      <div class='form-text-wrap'>
+        <label class="form-text">ニックネーム</label>
+        <span class="indispensable">必須</span>
+      </div>
+      <%= f.text_field :nickname, class:"input-default", id:"nickname", maxlength:"40" %>
     </div>
-    <%= f.text_area :nickname, class:"input-default", id:"nickname", maxlength:"40" %>
-  </div>
-  <div class="form-group">
-    <div class='form-text-wrap'>
-      <label class="form-text">固定コメント</label>
+    <div class="form-group">
+      <div class='form-text-wrap'>
+        <label class="form-text">固定コメント</label>
+      </div>
+      <%= f.text_area :comment, class:"input-default", id:"comment", maxlength:"40" %>
     </div>
-    <%= f.text_area :comment, class:"input-default", id:"comment", maxlength:"40" %>
-  </div>
-  <div class="form-group">
-    <div class='form-text-wrap'>
-      <label class="form-text">自由記載欄</label>
+    <div class="form-group">
+      <div class='form-text-wrap'>
+        <label class="form-text">自由記載欄</label>
+      </div>
+      <%= f.text_area :content, class:"input-default", id:"content", placeholder:"コメント・自己紹介など", rows:"5" %>
     </div>
-    <%= f.text_field :content, class:"input-default", id:"content", placeholder:"コメント・自己紹介など" %>
-  </div>
-  <div class="form-group">
-    <div class='form-text-wrap'>
-      <label class="form-text">SNSアカウント登録</label>
+    <div class="form-group">
+      <div class='form-text-wrap'>
+        <label class="form-text">SNSアカウント登録</label>
+      </div>
+      <div class='form-text-wrap'>
+        <label class="form-text">twitter</label>
+      </div>
+      <%= f.text_field :twitter, class:"input-default", id:"twitter", placeholder:"URLを入力してください" %>
+      <div class='form-text-wrap'>
+        <label class="form-text">instagram</label>
+      </div>
+      <%= f.text_field :instagram, class:"input-default", id:"instagram", placeholder:"URLを入力してください" %>
     </div>
-    <%= image_tag "twitter.png", class: :twitter_icon %>
-    <%= f.text_field :twitter, class:"input-default", id:"twitter", placeholder:"URLを入力してください" %>
-    
-    <%= image_tag "instagram.png", class: :instagram_icon %>
-    <%= f.text_field :instagram, class:"input-default", id:"instagram", placeholder:"URLを入力してください" %>
-  </div>
-  <div class="form-group">
-    <div class="form-text-wrap">
-      <label class="form-text">ハッシュタグ(スペースを入力すると複数のタグ付けができます)</label>
+    <div class="form-group">
+      <div class="form-text-wrap">
+        <label class="form-text">ハッシュタグ</label>
+      </div>
+      <%= f.text_field :tag_name, class:"input-default", id:"tag_name", placeholder:"例) #仕事 #恋愛 #人間関係"%>
+      <div class="form-text-wrap">
+        <label class="form-text">※スペースを入力すると複数のタグ付けができます</label>
+      </div>
     </div>
-    <%= f.text_field :tag_name, value: @tag_list, class:"input-default", id:"tag_name", placeholder:"例)#仕事 #恋愛 #人間関係"%>
-  </div>
-  <div class='register-btn'>
-    <%= f.submit "登録" ,class:"register-red-btn" %>
+    <div class='register-btn'>
+      <%= f.submit "登録" ,class:"register-red-btn" %>
+    </div>
   </div>
 </div>
 <% end %>
